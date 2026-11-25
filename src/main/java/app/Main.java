@@ -1,10 +1,12 @@
-import util.ConexionBBDD;
+package app;
+
+import bbdd.ConexionBBDD;
+import bbdd.GestionTablas;
+import dao.GestionCoches;
+import dao.GestionPropietarios;
+import dao.GestionTraspasos;
 import util.GestionCSV;
-import util.GestionCoches;
 import util.GestionInforme;
-import util.GestionPropietarios;
-import util.GestionTablas;
-import util.GestionTraspasos;
 
 import java.util.Scanner;
 

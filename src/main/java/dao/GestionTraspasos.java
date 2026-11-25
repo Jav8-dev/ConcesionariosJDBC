@@ -1,4 +1,6 @@
-package util;
+package dao;
+
+import bbdd.ConexionBBDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,7 +85,7 @@ public class GestionTraspasos {
             System.out.println("Traspaso realizado correctamente. Nuevo propietario DNI: " + dniComprador);
 
         } catch (SQLException e) {
-            GestionCSV.hacerRollback(conn);
+            ConexionBBDD.hacerRollback(conn);
             System.out.println("Error durante el traspaso (se ha hecho rollback): " + e.getMessage());
         } finally {
             try {

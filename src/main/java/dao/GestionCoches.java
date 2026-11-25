@@ -1,4 +1,6 @@
-package util;
+package dao;
+
+import bbdd.ConexionBBDD;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -57,7 +59,7 @@ public class GestionCoches {
             ps.executeUpdate();
             System.out.println("Coche insertado correctamente (sin propietario): " + matricula);
         } catch (SQLException e) {
-            if (GestionPropietarios.esErrorClaveDuplicada(e)) {
+            if (ConexionBBDD.esErrorClaveDuplicada(e)) {
                 System.out.println("Error: Ya existe un coche con la matrícula " + matricula);
             } else {
                 System.out.println("Error al insertar el coche: " + e.getMessage());

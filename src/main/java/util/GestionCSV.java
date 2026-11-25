@@ -1,5 +1,7 @@
 package util;
 
+import bbdd.ConexionBBDD;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -76,14 +78,14 @@ public class GestionCSV {
             System.out.println("Importación completada con éxito. Coches insertados: " + contador);
 
         } catch (IOException e) {
-            hacerRollback(conn);
+            ConexionBBDD.hacerRollback(conn);
             System.out.println("Error de lectura del archivo CSV (se ha hecho rollback): " + e.getMessage());
         } catch (NumberFormatException e) {
-            hacerRollback(conn);
+            ConexionBBDD.hacerRollback(conn);
             System.out.println("Error en el formato numérico del precio en el CSV (se ha hecho rollback): " + e.getMessage());
         } catch (SQLException e) {
-            hacerRollback(conn);
-            if (GestionPropietarios.esErrorClaveDuplicada(e)) {
+            ConexionBBDD.hacerRollback(conn);
+            if (ConexionBBDD.esErrorClaveDuplicada(e)) {
                 System.out.println("Error: Alguna matrícula del CSV ya existe en la BBDD. Se ha deshecho toda la importación (rollback).");
             } else {
                 System.out.println("Error SQL durante la importación (se ha hecho rollback): " + e.getMessage());
@@ -94,21 +96,6 @@ public class GestionCSV {
             } catch (SQLException e) {
                 System.out.println("Error al restaurar autoCommit: " + e.getMessage());
             }
-        }
-    }
-
-    /**
-     * Método auxiliar para ejecutar rollback de forma segura.
-     *
-     * @param conn Conexión sobre la que hacer rollback
-     */
-    public static void hacerRollback(Connection conn) {
-        try {
-            if (conn != null) {
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al hacer rollback: " + e.getMessage());
         }
     }
 }

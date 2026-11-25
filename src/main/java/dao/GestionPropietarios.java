@@ -1,4 +1,6 @@
-package util;
+package dao;
+
+import bbdd.ConexionBBDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +54,7 @@ public class GestionPropietarios {
             ps.executeUpdate();
             System.out.println("Propietario registrado correctamente con DNI: " + dni);
         } catch (SQLException e) {
-            if (esErrorClaveDuplicada(e)) {
+            if (ConexionBBDD.esErrorClaveDuplicada(e)) {
                 System.out.println("Error: Ya existe un propietario registrado con el DNI " + dni);
             } else {
                 System.out.println("Error al registrar propietario: " + e.getMessage());
@@ -79,18 +81,5 @@ public class GestionPropietarios {
             }
         }
         return null;
-    }
-
-    /**
-     * Método auxiliar para detectar si una SQLException se debe a una clave única/primaria duplicada
-     * tanto en MySQL como en SQLite.
-     *
-     * @param e Excepción SQL capturada
-     * @return true si es un error de duplicado o restricción UNIQUE/PRIMARY KEY
-     */
-    public static boolean esErrorClaveDuplicada(SQLException e) {
-        String sqlState = e.getSQLState();
-        String mensaje = e.getMessage() != null ? e.getMessage().toLowerCase() : "";
-        return "23000".equals(sqlState) || mensaje.contains("unique") || mensaje.contains("duplicate") || mensaje.contains("primary key");
     }
 }
