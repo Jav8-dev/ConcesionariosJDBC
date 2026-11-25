@@ -1,0 +1,5 @@
+target/
+*.db
+informe_concesionario.txt
+.idea/
+*.iml

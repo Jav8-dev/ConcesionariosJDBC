@@ -1,0 +1,37 @@
+PROYECTO: GESTIÓN DE CONCESIONARIO CON JDBC (MySQL y SQLite)
+==============================================================
+
+1. VENTAJAS E INCONVENIENTES DE USAR CONECTORES JDBC
+---------------------------------------------------
+Ventajas:
+- Permite conectar una aplicación Java con casi cualquier base de datos relacional
+  usando siempre las mismas interfaces estándar (Connection, PreparedStatement, ResultSet).
+- Cambiar de gestor de base de datos (por ejemplo de SQLite a MySQL) es muy sencillo
+  si los datos de conexión están en un fichero config.properties.
+- Evita inyecciones SQL gracias al uso de PreparedStatement.
+- Permite controlar transacciones manualmente con setAutoCommit(false), commit() y rollback().
+
+Inconvenientes:
+- Hay que escribir bastante código repetitivo para abrir recursos, ejecutar consultas y
+  recorrer el ResultSet para pasar los datos a objetos Java.
+- Aunque el API JDBC es estándar, el lenguaje SQL cambia ligeramente entre gestores
+  (por ejemplo, AUTO_INCREMENT en MySQL frente a AUTOINCREMENT en SQLite, o los
+  procedimientos almacenados que existen en MySQL pero no en SQLite).
+- Hay que gestionar manualmente las excepciones SQLException y cerrar correctamente los
+  recursos (solucionado con try-with-resources).
+
+2. COMPARATIVA: BBDD EMBEBIDA (SQLite) VS SERVIDOR (MySQL)
+----------------------------------------------------------
+SQLite (Base de datos embebida):
+- Ventajas: No necesita instalar ni arrancar ningún servidor; toda la base de datos se
+  guarda en un único fichero local (concesionario.db), lo que facilita mucho las pruebas
+  y el despliegue en aplicaciones pequeñas o de escritorio.
+- Inconvenientes: No está pensada para muchos usuarios escribiendo a la vez (concurrencia
+  limitada) y no soporta características avanzadas como procedimientos almacenados.
+
+MySQL (Base de datos independiente / servidor):
+- Ventajas: Soporta múltiples clientes conectados simultáneamente, control de usuarios y
+  permisos, mayor rendimiento con grandes volúmenes de datos y procedimientos almacenados
+  (como sp_coches_por_marca).
+- Inconvenientes: Requiere tener instalado, configurado y en ejecución el servidor MySQL,
+  además de gestionar credenciales (usuario y contraseña).
