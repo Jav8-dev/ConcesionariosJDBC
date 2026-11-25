@@ -1,6 +1,4 @@
-package bbdd;
-
-import util.Configuracion;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

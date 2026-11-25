@@ -1,6 +1,6 @@
-package dao;
+package service;
 
-import bbdd.ConexionBBDD;
+import utils.ConexionBBDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package modelo;
+package model;
 
 /**
  * Representa a un propietario (cliente) del concesionario.

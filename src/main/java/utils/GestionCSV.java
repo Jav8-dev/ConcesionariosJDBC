@@ -1,6 +1,4 @@
-package util;
-
-import bbdd.ConexionBBDD;
+package utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

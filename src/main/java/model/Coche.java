@@ -1,4 +1,4 @@
-package modelo;
+package model;
 
 /**
  * Representa un coche gestionado por el concesionario.

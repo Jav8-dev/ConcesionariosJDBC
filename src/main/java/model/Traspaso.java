@@ -1,4 +1,4 @@
-package modelo;
+package model;
 
 /**
  * Representa un traspaso (venta o cambio de propietario) de un coche.
